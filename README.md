@@ -87,3 +87,15 @@ terraform show
 1.  change the ami of the exact same main.tf and see what happens
 2.  1 added, one destroyed after apply
 3.  id not retained, ami switched out, old instance destroyed
+
+## variables tutorial
+
+1.  put more tf files into same folder (no other hierarchies allowed)
+2.  define variable with
+```
+variable "instance_name" {
+  description = "Value of the Name tag for the EC2 instance"
+  type        = string
+  default     = "yourvalue"
+}
+```
