@@ -59,3 +59,31 @@ terraform init
 terraform fmt
 ```
 formats, then outputs names of changed files.
+5.  validate for errors
+```console
+terraform validate
+```
+6.  apply
+  - when applying had an issue - could not find the ami.
+  - how to find ami?
+```console
+aws ec2 describe-images
+```
+- lists them all.
+- they are like docker images
+- just picked one ami-0fc0ab6d7593a9bd9
+- (also ami catalog in the aws console)
+
+- yes, like magic, infrastructure was created.
+
+7.  review state
+```console
+terraform show
+```
+- yes, by adding, state automatically updated.
+
+## modify tutorial
+
+1.  change the ami of the exact same main.tf and see what happens
+2.  1 added, one destroyed after apply
+3.  id not retained, ami switched out, old instance destroyed
