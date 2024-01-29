@@ -175,3 +175,15 @@ terraform init
 - now check if oss has anything
 
 - file created at /test1/state/remote-1.tfstate
+
+- so key-> filename
+- path -> folder structure
+
+- comparing to opteyes
+- they also use backend "oss"
+- they do not need tablestore related things
+- they have "profile" (optional - alciloud  profile name  as set in shared cred file)
+
+- manual test to see if things worked correctly.
+- reclone the repo
+- see if state is still correct.

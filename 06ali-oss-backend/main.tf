@@ -7,9 +7,7 @@ terraform {
     region              = "cn-shanghai"
     tablestore_table    = "statelock"
   }
-
 }
-
 
 provider "alicloud" {
   region = "cn-shanghai"
