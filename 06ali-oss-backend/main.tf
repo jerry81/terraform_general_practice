@@ -1,23 +1,22 @@
 terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
+  backend "oss" {
+    bucket              = "terraform-oss-backend-getting-started-2"
+    key                 = "remote-1.tfstate"
+    prefix              = "test1/state"
+    tablestore_endpoint = "https://tf-state-1.cn-shanghai.ots.aliyuncs.com"
+    region              = "cn-shanghai"
+    tablestore_table    = "statelock"
   }
 
-  required_version = ">= 1.2.0"
 }
 
-provider "aws" {
-  region = "cn-north-1"
+
+provider "alicloud" {
+  region = "cn-shanghai"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-03290f6be222b4fb2"
-  instance_type = "t1.micro"
-
-  tags = {
-    Name = var.instance_name
-  }
+resource "alicloud_security_group" "getting_stahted_sg" {
+  name        = "getting_stahted_sg"
+  description = "getting_stahted_sg"
+  vpc_id      = "vpc-uf6wipm4osx7li80phtjp"
 }

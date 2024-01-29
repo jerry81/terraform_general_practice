@@ -163,3 +163,15 @@ terraform init
 - plan, apply, destroy, other state modifiers will "lock" the state and modify the remote state
 
 - read only commands like show and state use the local state
+
+- when trying to create a ots called "terraform-remote" it complains that the instance already exists.
+
+- ok so i can init with just the backend block
+
+- now i need to actually create a state
+- try create sec group
+- need to reinit to bring alicloud provider in
+- oh goody, the sg was created.
+- now check if oss has anything
+
+- file created at /test1/state/remote-1.tfstate
