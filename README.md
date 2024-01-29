@@ -187,3 +187,8 @@ terraform init
 - manual test to see if things worked correctly.
 - reclone the repo
 - see if state is still correct.
+
+- test result:  after cloning a fresh github
+- i ran tf init
+- then tf show
+- got the proper state!
