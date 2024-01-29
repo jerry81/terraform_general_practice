@@ -125,3 +125,17 @@ terraform output
 - a.  expose info to user, cross dependency between tf configs, integration with external systems
 
 1.  trying apply with the output but no infrastructure up yet.
+
+## remote state tutorial
+
+- in prod env want secure encrypted state
+- run tf in remote env with shared access to state
+- tf cloud allows us to collaborate on infra changes
+- tutorial migrates project to tf cloud
+
+1.  tf account creation
+2.  login
+3.  get organization name
+4.  add "cloud" or "remote backend" block to main.tf file
+5.  terraform.tfstate no longer needed in each of our folders
+6.  tf cloud can store secrets accessible as variables (like AWS AK/secret)
