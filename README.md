@@ -139,3 +139,27 @@ terraform output
 4.  add "cloud" or "remote backend" block to main.tf file
 5.  terraform.tfstate no longer needed in each of our folders
 6.  tf cloud can store secrets accessible as variables (like AWS AK/secret)
+
+## oss for remote state
+
+[ref](https://www.alibabacloud.com/help/en/terraform/latest/quick-start-for-alibaba-cloud-oss-backend-for-terraform)
+
+- background:
+  - Local state: local storage
+    - By default, Terraform stores state data
+      - locally in a file named terraform.tfstate
+      - within the working directory.
+  - Remote state: remote storage
+    - Terraform stores state data in remote services such as Alibaba Cloud OSS, Terraform Cloud, and HashiCorp Consul. This improves state security and management flexibility, allowing state data to be shared between all members of a team regardless of the Terraform working environment and working directory.
+
+```console
+terraform init
+```
+- this will install the plugin for the backend (oss)
+  - also grabs the state from oss
+- oss is one of 13 backends supported
+  - is standard (not enhanced) - meaning it supports state locking and storage
+
+- plan, apply, destroy, other state modifiers will "lock" the state and modify the remote state
+
+- read only commands like show and state use the local state
