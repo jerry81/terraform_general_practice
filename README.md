@@ -119,3 +119,9 @@ variable "instance_name" {
 ```console
 terraform output
 ```
+
+- it is not necessary to first have the infrastructure before getting the outputs.
+- q.  what's the practical application of outputs?
+- a.  expose info to user, cross dependency between tf configs, integration with external systems
+
+1.  trying apply with the output but no infrastructure up yet.
