@@ -99,3 +99,23 @@ variable "instance_name" {
   default     = "yourvalue"
 }
 ```
+
+## outputs tutorial
+
+0.  first reapply the ec2
+1. create outputs file
+  - note syntax
+  ```tf
+  output "name_of_output" {
+    description = ""
+    value = aws_instance.app_server.id
+    # this is apparently something from a resource only known after apply
+  }
+  ```
+2. apply again with outputs
+3.  then work with outputs.
+  - terraform prints output
+  - can query for output
+```console
+terraform output
+```
