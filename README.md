@@ -179,11 +179,6 @@ terraform init
 - so key-> filename
 - path -> folder structure
 
-- comparing to opteyes
-- they also use backend "oss"
-- they do not need tablestore related things
-- they have "profile" (optional - alciloud  profile name  as set in shared cred file)
-
 - manual test to see if things worked correctly.
 - reclone the repo
 - see if state is still correct.
@@ -192,3 +187,12 @@ terraform init
 - i ran tf init
 - then tf show
 - got the proper state!
+
+
+- comparing to opteyes
+- they also use backend "oss"
+- they do not need tablestore related things
+- they have "profile" (optional - alciloud  profile name  as set in shared cred file)
+- they use vars for profile and region
+- they use var for environment
+- they use empty variables as the variables are expected to be passed in or use .env (guess)
