@@ -238,4 +238,36 @@ variable "aliyun_profile" {}
 variable "aliyun_region" {}
 ```
 
-- finally, can use a export TF*VAR*{variable_name} to setup your local env vars which get read in automatically
+- finally, can use a export TF_VAR_{variable_name} to setup your local env vars which get read in automatically
+
+- tf "data" objects i.e.
+```tf
+data "terraform_remote_state" "vpc" {
+  backend = "oss"
+  config = {
+    bucket = "optize-terraform-state-production"
+    prefix = "Production/01.K8S/VPC"
+    key    = "terraform.tfstate"
+    region = "cn-shanghai"
+  }
+}
+```
+- this means one project, for example SLB needs to get the state for vpc
+  - we tell it where it can get the state from (bucket name, path(prefix), and key (file name))
+
+- "resource" object type (bread and butter) i.e.
+```tf
+
+resource "alicloud_slb" "k8s" {
+  name          = "a593192e456c711ea99ed66cbf357b27"
+  specification = "slb.s1.small"
+  tags = {
+    "kubernetes.do.not.delete" = "a593192e456c711ea99ed66cbf357b27"
+  }
+}
+
+```
+- syntax for the header is
+```tf
+resource "{provider_type}_{resource_type}" "{resource_name}"
+```
