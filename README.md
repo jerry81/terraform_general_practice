@@ -281,4 +281,9 @@ resource "{provider_type}_{resource_type}" "{resource_name}"
 
 - they do include the state backend (oss bucket) as a resource.
 
-- todo in future:  TF for Postgres, Redis, ES, influx, kafka
+- todo in future:  TF for Postgres, Redis, ES, influx, kafka, RAM, OSS
+
+- let's check out k8s in detail:
+- let's start with vpc
+- k8s gets a vpc.
+- postgres apparently gets its own VPC which is different from k8s, explaining need for CEN
