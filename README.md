@@ -11,9 +11,11 @@
 - will run the default nginx image at localhost 8000
 
 - notes:
+
 ```console
 terraform init
 ```
+
 - installed the provider plugins for docker
 - creates .terraform.lock.hcl file to (like yarn.lock)
 
@@ -44,31 +46,44 @@ stops the nginx
 - need aws credentials
 
 1.  configure aws cli
+
 ```console
 aws configure
 ```
+
 2. paste the code
-  - note: AMI is amazon machine image (preconfiged vm  to create ec2 instances )
+
+- note: AMI is amazon machine image (preconfiged vm to create ec2 instances )
+
 3.  init again
+
 ```console
 terraform init
 ```
+
 - notice that for each project you reinit
+
 4.  auto-format
+
 ```console
 terraform fmt
 ```
-formats, then outputs names of changed files.
-5.  validate for errors
+
+formats, then outputs names of changed files. 5. validate for errors
+
 ```console
 terraform validate
 ```
+
 6.  apply
-  - when applying had an issue - could not find the ami.
-  - how to find ami?
+
+- when applying had an issue - could not find the ami.
+- how to find ami?
+
 ```console
 aws ec2 describe-images
 ```
+
 - lists them all.
 - they are like docker images
 - just picked one ami-0fc0ab6d7593a9bd9
@@ -77,9 +92,11 @@ aws ec2 describe-images
 - yes, like magic, infrastructure was created.
 
 7.  review state
+
 ```console
 terraform show
 ```
+
 - yes, by adding, state automatically updated.
 
 ## modify tutorial
@@ -92,6 +109,7 @@ terraform show
 
 1.  put more tf files into same folder (no other hierarchies allowed)
 2.  define variable with
+
 ```
 variable "instance_name" {
   description = "Value of the Name tag for the EC2 instance"
@@ -103,26 +121,31 @@ variable "instance_name" {
 ## outputs tutorial
 
 0.  first reapply the ec2
-1. create outputs file
-  - note syntax
-  ```tf
-  output "name_of_output" {
-    description = ""
-    value = aws_instance.app_server.id
-    # this is apparently something from a resource only known after apply
-  }
-  ```
+1.  create outputs file
+
+- note syntax
+
+```tf
+output "name_of_output" {
+  description = ""
+  value = aws_instance.app_server.id
+  # this is apparently something from a resource only known after apply
+}
+```
+
 2. apply again with outputs
-3.  then work with outputs.
-  - terraform prints output
-  - can query for output
+3. then work with outputs.
+
+- terraform prints output
+- can query for output
+
 ```console
 terraform output
 ```
 
 - it is not necessary to first have the infrastructure before getting the outputs.
-- q.  what's the practical application of outputs?
-- a.  expose info to user, cross dependency between tf configs, integration with external systems
+- q. what's the practical application of outputs?
+- a. expose info to user, cross dependency between tf configs, integration with external systems
 
 1.  trying apply with the output but no infrastructure up yet.
 
@@ -155,9 +178,11 @@ terraform output
 ```console
 terraform init
 ```
+
 - this will install the plugin for the backend (oss)
   - also grabs the state from oss
 - oss is one of 13 backends supported
+
   - is standard (not enhanced) - meaning it supports state locking and storage
 
 - plan, apply, destroy, other state modifiers will "lock" the state and modify the remote state
@@ -183,16 +208,34 @@ terraform init
 - reclone the repo
 - see if state is still correct.
 
-- test result:  after cloning a fresh github
+- test result: after cloning a fresh github
 - i ran tf init
 - then tf show
 - got the proper state!
 
-
 - comparing to opteyes
 - they also use backend "oss"
 - they do not need tablestore related things
-- they have "profile" (optional - alciloud  profile name  as set in shared cred file)
+- they have "profile" (optional - alciloud profile name as set in shared cred file)
 - they use vars for profile and region
 - they use var for environment
 - they use empty variables as the variables are expected to be passed in or use .env (guess)
+  - there are 3 methods to use this. terraform.tfvars (they encrypt it) which has the actual values
+    - note the different syntax i.e.
+
+```tf
+# terraform.tfvars
+environment = "dev"
+aliyun_profile = "my_profile"
+aliyun_region = "us-west-1"
+```
+
+which is used by
+
+```tf
+variable environment {}
+variable "aliyun_profile" {}
+variable "aliyun_region" {}
+```
+
+- finally, can use a export TF*VAR*{variable_name} to setup your local env vars which get read in automatically
