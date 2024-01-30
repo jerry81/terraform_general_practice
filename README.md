@@ -271,3 +271,14 @@ resource "alicloud_slb" "k8s" {
 ```tf
 resource "{provider_type}_{resource_type}" "{resource_name}"
 ```
+
+- what is CEN?
+  - cloud enterprise network - allows for communications between VPCs
+
+- they use ali dns, we do not.
+
+- they statically add dns challenge codes as records
+
+- they do include the state backend (oss bucket) as a resource.
+
+- todo in future:  TF for Postgres, Redis, ES, influx, kafka
