@@ -287,3 +287,7 @@ resource "{provider_type}_{resource_type}" "{resource_name}"
 - let's start with vpc
 - k8s gets a vpc.
 - postgres apparently gets its own VPC which is different from k8s, explaining need for CEN
+
+- imported staging k8s
+- vpc_id not allowed in resource block
+- nat_gateway_id not allowed in resource block
